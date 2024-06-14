@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase{
     private TalonFX topMotor = new TalonFX(3, "rhino");
-    private TalonFX bottomMotor = new TalonFX(1, "rhino");
+    private TalonFX bottomMotor = new TalonFX(2, "rhino");
     private PIDController topPid = new PIDController(0.17, 0, 0);
     private PIDController bottomPid = new PIDController(0.18, 0, 0);
     private double speed;
