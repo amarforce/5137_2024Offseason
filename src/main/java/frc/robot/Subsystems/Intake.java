@@ -4,6 +4,9 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+//* New Config Code**//
+import frc.robot.config.ConfigManager;
+
 public class Intake extends SubsystemBase {
     private TalonFX motor;
     
