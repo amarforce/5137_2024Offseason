@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 // New Config Code
 import frc.robot.config.ConfigManager;
+import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
     private TalonFX motor;
@@ -13,13 +14,32 @@ public class Intake extends SubsystemBase {
     // PID Config code 
     private PIDConfig pidConfig;
 
-    public DrivetrainSubsystem() {
-        pidConfig = ConfigManager.loadConfig("IntakePIDConfig.json", PIDConfig.class);
+    
+
+    private void loadPIDConfig() {
+        pidConfig = ConfigManager.loadConfig(Constants.ConfigFiles.DRIVETRAIN_PID, PIDConfig.class);
         // Use pidConfig to set up your PID controller
     }
 
+    public void reloadPIDConfig() {
+        pidConfig = ConfigManager.reloadConfig(Constants.ConfigFiles.DRIVETRAIN_PID, PIDConfig.class);
+        // Update your PID controller with new values
+    }
+    
+    // Inner class to match JSON structure
+    public static class PIDConfig {
+        public double kP;
+        public double kI;
+        public double kD;
+        public double kF;
+    }
+    
     //Intake code 
     public Intake() {
+// Load PID Config
+       loadPIDConfig();
+
+        
         motor = new TalonFX(1, "rhino");
     }
 
