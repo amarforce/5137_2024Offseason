@@ -13,13 +13,20 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
+
+import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller; //Joystick 
+import frc.robot.commands.RefreshConfigsCommand; //Refresh Config
 
 import frc.robot.Subsystems.*;
 import frc.robot.Commands.*;
 import frc.robot.generated.TunerConstants;
 
 public class RobotContainer {
+  //Config Code
+    private final DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
+    private final ShooterSubsystem m_arm = new ShooterSubsystem();
+    private final IntakeSubsystem m_intake = new IntakeSubsystem();
+  
   // Generated Swerve Code
 
   private double MaxSpeed = TunerConstants.kSpeedAt12VoltsMps; // kSpeedAt12VoltsMps desired top speed
@@ -90,6 +97,10 @@ public class RobotContainer {
     controller.L2()
     .onTrue(intake_Commands.runBackward())
     .onFalse(intake_Commands.stop());
+    
+// Config file refresh tied to controller button
+    controller.L3()
+      .onTrue(new RefreshConfigsCommand(m_intake));
 
     controller.L1().onTrue(shooterCommands.forward());
     controller.R1().onTrue(shooterCommands.backward());
